@@ -8,9 +8,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/controller/FoodController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/controller/FoodController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/controller/FoodRestaurantController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/controller/FoodRestaurantController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/service/FoodRestaurantService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/service/FoodRestaurantService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/service/FoodService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/service/FoodService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/service/RestaurantService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/service/RestaurantService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +92,7 @@
       <updated>1663881826355</updated>
       <workItem from="1663881827736" duration="203000" />
       <workItem from="1663882380750" duration="782000" />
-      <workItem from="1663942211304" duration="1695000" />
+      <workItem from="1663942211304" duration="2695000" />
     </task>
     <servers />
   </component>

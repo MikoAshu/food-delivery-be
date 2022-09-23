@@ -16,7 +16,11 @@ public class FoodRestaurantController {
 
     @GetMapping("/getrestFoods/{restrurant_id}/{food_id}")
     public ResponseEntity<FoodRestaurantDto> getrestFoods(@PathVariable Long restrurant_id, @PathVariable Long food_id){
-        return new ResponseEntity<>(foodRestaurantService.getrestfood(restrurant_id, food_id), HttpStatus.OK);
+        FoodRestaurantDto foodRestaurantDto = foodRestaurantService.getrestfood(restrurant_id, food_id);
+        if(foodRestaurantDto == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(foodRestaurantDto, HttpStatus.OK);
     }
     @PostMapping("/addrestfoods")
     public ResponseEntity<?> addrestfoods(@RequestBody FoodRestaurant foodRestaurant){
