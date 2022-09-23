@@ -2,6 +2,7 @@ package miu.edu.cs544.userservice.service;
 
 import lombok.RequiredArgsConstructor;
 import miu.edu.cs544.userservice.dao.AppUser;
+import miu.edu.cs544.userservice.exception.CustomException;
 import miu.edu.cs544.userservice.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import miu.edu.cs544.userservice.dao.AppUser;
 import miu.edu.cs544.userservice.dto.UserDataDTO;
 import miu.edu.cs544.userservice.dto.UserResponseDTO;
+import miu.edu.cs544.userservice.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
