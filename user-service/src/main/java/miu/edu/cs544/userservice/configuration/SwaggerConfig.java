@@ -1,4 +1,4 @@
-package miu.edu.cs544.userservice.swagger;
+package miu.edu.cs544.userservice.configuration;
 
 import com.google.common.base.Predicates;
 import org.springframework.context.annotation.Bean;
@@ -46,7 +46,7 @@ public class SwaggerConfig {
         .version("1.0.0")
         .build();
   }
-  
+
   private ApiKey apiKey() {
     return new ApiKey("Authorization", "Authorization", "header");
   }
