@@ -4,11 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +22,7 @@ public class Food {
     private String name;
     private  String food_type;
 
-    @OneToMany(mappedBy = "food")
+    @OneToMany(mappedBy = "food",cascade = CascadeType.ALL)
     private List<FoodRestaurant> foodRestaurant;
     public Food(String name, String food_type) {
         this.name = name;

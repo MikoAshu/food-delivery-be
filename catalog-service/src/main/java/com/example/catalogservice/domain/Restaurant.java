@@ -6,10 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,9 +22,9 @@ public class Restaurant {
     private String location;
     private String resturnat_type;
 
-    @OneToMany(mappedBy = "restaurant")
+    @OneToMany(mappedBy = "restaurant",cascade = CascadeType.ALL)
     private List<FoodRestaurant> foodRestaurantList;
-    @Range(min = 1, max = 5)
+//    @Range(min = 1, max = 5)
     private float rating;
 
     public Restaurant(String location, String resturnat_type, float rating) {
