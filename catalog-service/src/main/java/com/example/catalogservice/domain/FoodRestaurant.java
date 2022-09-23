@@ -12,9 +12,9 @@ import javax.persistence.ManyToOne;
 
 @Getter
 @Setter
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 public class FoodRestaurant {
     @Id
     @GeneratedValue
