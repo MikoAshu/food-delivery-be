@@ -18,8 +18,8 @@ public class FoodRestaurantService {
     @Autowired
     FoodRestaurantRepository foodRestaurantRepository;
 
-    public FoodRestaurant getrestfood(Long resturant_id, Long food_id){
-        return foodRestaurantRepository.findFoodRestaurantByFood_idAndRestaurant_id(resturant_id, food_id);
+    public FoodRestaurant getrestfood(Long food_id,Long resturant_id){
+        return foodRestaurantRepository.findFoodRestaurantByFoodAndRestaurant(food_id, resturant_id);
     }
 
     public void addrestfoods(FoodRestaurant foodRestaurant){

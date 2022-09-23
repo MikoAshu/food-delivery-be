@@ -20,14 +20,14 @@ public class FoodRestaurant {
     @GeneratedValue
     private Long id;
     @ManyToOne
-    private Food food_id;
+    private Food food;
     @ManyToOne
-    private Restaurant restaurant_id;
+    private Restaurant restaurant;
     private double price;
 
-    public FoodRestaurant(Food food_id, Restaurant restaurant_id, double price) {
-        this.food_id = food_id;
-        this.restaurant_id = restaurant_id;
+    public FoodRestaurant(Food food, Restaurant restaurant, double price) {
+        this.food = food;
+        this.restaurant = restaurant;
         this.price = price;
     }
 }

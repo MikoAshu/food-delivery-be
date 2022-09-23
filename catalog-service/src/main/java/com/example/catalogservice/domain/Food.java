@@ -8,6 +8,8 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,6 +23,8 @@ public class Food {
     private String name;
     private  String food_type;
 
+    @OneToMany(mappedBy = "food")
+    private List<FoodRestaurant> foodRestaurant;
     public Food(String name, String food_type) {
         this.name = name;
         this.food_type = food_type;
