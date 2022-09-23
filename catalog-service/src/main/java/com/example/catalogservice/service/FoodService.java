@@ -1,11 +1,14 @@
 package com.example.catalogservice.service;
 
 import com.example.catalogservice.domain.Food;
+import com.example.catalogservice.dto.FoodDto;
 import com.example.catalogservice.repository.FoodRepository;
 import com.example.catalogservice.repository.RestaurantRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,14 +19,22 @@ public class FoodService {
     @Autowired
     RestaurantRepository restaurantRepository;
 
-    public List<Food> getFoods(){
-        return foodRepository.findAll();
+    public List<FoodDto> getFoods(){
+        List<Food> foods = foodRepository.findAll();
+        List<FoodDto> foodDtos = new ArrayList<>();
+        ModelMapper modelMapper = new ModelMapper();
+        for(Food food: foods){
+            foodDtos.add(modelMapper.map(food, FoodDto.class));
+        }
+        return foodDtos;
     }
-    public Food getFood(Long foodId){
-        return foodRepository.findById(foodId).get();
+    public FoodDto getFood(Long foodId){
+        Food food = foodRepository.findById(foodId).get();
+        ModelMapper modelMapper = new ModelMapper();
+        FoodDto foodDto = modelMapper.map(food, FoodDto.class);
+        return foodDto;
     }
-    public Food addfood(Food food){
+    public void addfood(Food food){
         foodRepository.save(food);
-        return food;
     }
 }
