@@ -24,7 +24,7 @@ public class Restaurant {
 
     @OneToMany(mappedBy = "restaurant",cascade = CascadeType.ALL)
     private List<FoodRestaurant> foodRestaurantList;
-//    @Range(min = 1, max = 5)
+    @Range(min = 1, max = 5)
     private float rating;
 
     public Restaurant(String location, String resturnat_type, float rating) {
