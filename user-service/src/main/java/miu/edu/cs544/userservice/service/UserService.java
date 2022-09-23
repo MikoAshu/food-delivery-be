@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import miu.edu.cs544.userservice.dao.AppUser;
 import miu.edu.cs544.userservice.exception.CustomException;
 import miu.edu.cs544.userservice.repository.UserRepository;
+import miu.edu.cs544.userservice.security.JwtTokenProvider;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
