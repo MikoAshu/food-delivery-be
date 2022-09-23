@@ -8,10 +8,10 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-public interface OrderRepository extends JpaRepository<Order,Integer> {
+public interface OrderRepository extends JpaRepository<Order,Long> {
 
-    @Query(value = "select o from Order o join o.order_status s where o.user_id =:u and s.statusId = :i")
-    public List<Order> getOrderById(@Param("u") Integer u, @Param("i") Integer i);
+    @Query(value = "from order_table o where o.user_id =:a and o.order_status.id = :b")
+    public List<Order> findOrderById(@Param("a") Long id, @Param("b") Long status_id);
 }
 
 
