@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -33,5 +34,10 @@ public class Restaurant {
         this.location = location;
         this.resturnat_type = resturnat_type;
         this.rating = rating;
+        this.foodRestaurantList = new ArrayList<>();
+    }
+    public boolean addFoodRestaurant(FoodRestaurant foodRestaurant){
+        this.foodRestaurantList.add(foodRestaurant);
+        return true;
     }
 }

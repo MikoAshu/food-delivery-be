@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -28,5 +29,10 @@ public class Food {
     public Food(String name, String food_type) {
         this.name = name;
         this.food_type = food_type;
+        this.foodRestaurant = new ArrayList<>();
+    }
+    public boolean addFoodRestaurant(FoodRestaurant foodRestaurant){
+        this.foodRestaurant.add(foodRestaurant);
+        return true;
     }
 }
