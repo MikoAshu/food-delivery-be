@@ -17,7 +17,7 @@ import javax.persistence.Id;
 public class OrderStatus {
     @Id
     @GeneratedValue
-    private Integer statusId;
+    private Long id;
     private String name;
     private String code;
 
