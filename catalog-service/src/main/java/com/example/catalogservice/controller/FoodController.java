@@ -3,7 +3,6 @@ package com.example.catalogservice.controller;
 import com.example.catalogservice.domain.Food;
 import com.example.catalogservice.domain.Restaurant;
 import com.example.catalogservice.dto.FoodDto;
-import com.example.catalogservice.intergation.KaffkaFoodSender;
 import com.example.catalogservice.service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,8 +18,8 @@ public class FoodController {
     @Autowired
     FoodService foodService;
 
-    @Autowired
-    KaffkaFoodSender kaffkaSender;
+//    @Autowired
+//    KaffkaFoodSender kaffkaSender;
 
     @GetMapping("/getfoods")
     public ResponseEntity<List<FoodDto>> getfoods(){
@@ -28,7 +27,6 @@ public class FoodController {
         if (foodsdtos==null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        kaffkaSender.sendListOfFoodDtos(foodsdtos);
         return new ResponseEntity<>(foodsdtos, HttpStatus.OK);
     }
 
