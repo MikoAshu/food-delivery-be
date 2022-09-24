@@ -12,9 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FoodDto {
-
     private Long id;
     private String name;
     private  String food_type;
-
 }

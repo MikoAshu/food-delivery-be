@@ -4,8 +4,11 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import miu.edu.cs544.userservice.dao.AppUser;
 import miu.edu.cs544.userservice.dao.AppUserRole;
+import miu.edu.cs544.userservice.dto.UserResponseDTO;
 import miu.edu.cs544.userservice.exception.CustomException;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -26,10 +29,6 @@ import java.util.stream.Collectors;
 @Component
 public class JwtTokenProvider {
 
-  /**
-   * THIS IS NOT A SECURE PRACTICE! For simplicity, we are storing a static key here. Ideally, in a
-   * microservices environment, this key would be kept on a config-server.
-   */
   @Value("${security.jwt.token.secret-key:secret-key}")
   private String secretKey;
 
@@ -39,15 +38,19 @@ public class JwtTokenProvider {
   @Autowired
   private MyUserDetails myUserDetails;
 
+  private ModelMapper modelMapper = new ModelMapper();
+
   @PostConstruct
   protected void init() {
     secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
   }
 
-  public String createToken(String username, List<AppUserRole> appUserRoles) {
+  public String createToken(String username, AppUser appUser) {
 
     Claims claims = Jwts.claims().setSubject(username);
-    claims.put("auth", appUserRoles.stream().map(s -> new SimpleGrantedAuthority(s.getAuthority())).filter(Objects::nonNull).collect(Collectors.toList()));
+
+    claims.put("user", modelMapper.map(appUser, UserResponseDTO.class));
+//    claims.put("auth", appUserRoles.stream().map(s -> new SimpleGrantedAuthority(s.getAuthority())).filter(Objects::nonNull).collect(Collectors.toList()));
 
     Date now = new Date();
     Date validity = new Date(now.getTime() + validityInMilliseconds);
