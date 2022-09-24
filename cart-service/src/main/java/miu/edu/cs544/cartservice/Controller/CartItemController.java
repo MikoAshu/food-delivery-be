@@ -17,16 +17,16 @@ import java.util.stream.Collectors;
 public class CartItemController {
     @Autowired
     private ModelMapper modelMapper;
-
+    @Autowired
     private CartItemService cartItemService;
 
-    @GetMapping("/")
+    @GetMapping("/cart/")
     public List<CartItemDTO> getAllCartItems() {
         return cartItemService.getAllCartItems().stream().map(item -> modelMapper.map(item, CartItemDTO.class))
                 .collect(Collectors.toList());
     }
 
-    @PostMapping("/")
+    @PostMapping("/cart/")
     public ResponseEntity<CartItemDTO> addCartItem(@RequestBody CartItemDTO cartItemDTO) {
         //convert DTO to entity
         CartItem cartItemRequest = modelMapper.map(cartItemDTO, CartItem.class);
@@ -37,7 +37,7 @@ public class CartItemController {
         return new ResponseEntity<CartItemDTO>(cartItemResponse, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/cart/{id}")
     public ResponseEntity<CartItemDTO> updateCartItem(@PathVariable Long id, @RequestBody CartItemDTO cartItemDTO) {
         CartItem cartItemRequest = modelMapper.map(cartItemDTO, CartItem.class);
         CartItem item = cartItemService.updateCartItem(id, cartItemRequest);
@@ -45,7 +45,7 @@ public class CartItemController {
         CartItemDTO cartItemResponse = modelMapper.map(item, CartItemDTO.class);
         return ResponseEntity.ok().body(cartItemResponse);
     }
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/cart/{id}")
     public ResponseEntity<CartItemDTO> deleteCartItem(@PathVariable Long id) {
         cartItemService.deleteCartItem(id);
         CartItemDTO cartItemResponse = modelMapper.map(null, CartItemDTO.class);

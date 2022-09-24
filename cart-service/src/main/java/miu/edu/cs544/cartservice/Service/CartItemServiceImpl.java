@@ -4,9 +4,10 @@ import miu.edu.cs544.cartservice.Domain.CartItem;
 import miu.edu.cs544.cartservice.Repository.CartItemRepository;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class CartItemServiceImpl implements CartItemService{
     @Autowired
     private CartItemRepository cartItemRepository;
@@ -23,6 +24,7 @@ public class CartItemServiceImpl implements CartItemService{
 
     @Override
     public CartItem updateCartItem(Long id, CartItem itemRequest) {
+
         CartItem cartItem = cartItemRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException((String) null));
         cartItem.setFoodId(itemRequest.getFoodId());
