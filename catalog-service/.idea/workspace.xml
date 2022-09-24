@@ -5,15 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4636ba9a-b82b-4897-97a7-4a40272c32d7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/catalog-service.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/catalog-service.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/CatalogServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/CatalogServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/controller/ResturantController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/controller/ResturantController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/domain/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/domain/Food.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/domain/FoodRestaurant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/domain/FoodRestaurant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/controller/FoodController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/controller/FoodController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/domain/Restaurant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/domain/Restaurant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/dto/FoodDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/dto/FoodDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/intergation/KaffkaSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/intergation/KaffkaFoodSender.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +101,7 @@
       <workItem from="1663881827736" duration="203000" />
       <workItem from="1663882380750" duration="782000" />
       <workItem from="1663942211304" duration="3920000" />
-      <workItem from="1663949397683" duration="4753000" />
+      <workItem from="1663949397683" duration="11600000" />
     </task>
     <servers />
   </component>
