@@ -17,11 +17,15 @@ public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
+
+    @Autowired
+    private ModelMapper mapper;
+
     @Autowired
     private OrderStatusRepository orderStatusRepository;
 
     public List<OrderDto> getOrders(){
-        ModelMapper mapper = new ModelMapper();
+//        ModelMapper mapper = new ModelMapper();
         List<Order> orders = orderRepository.findAll();
         List<OrderDto> orderDtos = new ArrayList<>();
         for(Order o : orders){
@@ -32,7 +36,7 @@ public class OrderService {
 
     public List<OrderDto> getOrderById(Long user_id, Long status_id){
         List<Order> orders = orderRepository.findOrderById(user_id, status_id);
-        ModelMapper mapper = new ModelMapper();
+//        ModelMapper mapper = new ModelMapper();
         List<OrderDto> orderDtos = new ArrayList<>();
         for(Order o : orders){
             orderDtos.add(mapper.map(o,OrderDto.class));
