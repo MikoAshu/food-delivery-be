@@ -29,7 +29,8 @@ public class KaffkaFoodSender {
     private String topic2 = "RestaurantTopic";
     private String topic3 ="FoodRestaurantTopic";
     private String topic4 ="FoodTopic";
-    private static final String bootstrapServers = "docker.for.mac.localhost:9092";
+    private static final String bootstrapServers = "host.docker.internal:9092";
+//     private static final String bootstrapServers = "docker.for.mac.localhost:9092";
 
 
     public void sendListOfFoodDtos(List<FoodDto> foodDto){

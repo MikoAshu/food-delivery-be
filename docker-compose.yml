@@ -10,18 +10,26 @@ services:
     image: user-service
     ports:
       - "8080:9090"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"        
   order-service:
     image: order-service
     ports:
       - "8081:9090"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"       
   cart-service:
     image: cart-service
     ports:
       - "8082:9090"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"        
   catalog-service:
     image: catalog-service
     ports:
       - "8083:9090"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"     
   zookeeper:
     image: 'bitnami/zookeeper:latest'
     ports:
