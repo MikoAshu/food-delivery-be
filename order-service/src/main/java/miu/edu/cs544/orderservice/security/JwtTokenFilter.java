@@ -25,15 +25,12 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     try {
       if (token != null) {
         jwtTokenProvider.validateToken(token);
-      }
+      } else throw new Exception();
     } catch (Exception ex) {
-      //this is very important, since it guarantees the user is not authenticated at all
       SecurityContextHolder.clearContext();
       httpServletResponse.sendError(HttpServletResponse.SC_BAD_REQUEST, ex.getMessage());
       return;
     }
-
     filterChain.doFilter(httpServletRequest, httpServletResponse);
   }
-
 }
