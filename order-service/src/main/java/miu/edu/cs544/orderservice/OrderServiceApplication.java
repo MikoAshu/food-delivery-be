@@ -2,6 +2,9 @@ package miu.edu.cs544.orderservice;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.modelmapper.ModelMapper;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.annotation.KafkaListener;
+
 
 @SpringBootApplication
 @EnableKafka
@@ -29,13 +33,12 @@ public class OrderServiceApplication {
         return new NewTopic("events.new", 1, (short) 1);
     }
 
-//    @KafkaListener( topics = "events.new")
-//    public void listen(String myMessages) {
-//        logger.info("Received: " + foo);
-//        if (foo.getFoo().startsWith("fail")) {
-//            throw new RuntimeException("failed");
-//        }
-//        this.exec.execute(() -> System.out.println("Hit Enter to terminate..."));
-//    }
+    private final Logger logger = LoggerFactory.getLogger(OrderServiceApplication.class);
+
+    @KafkaListener(id= "topic-1" ,topics = "events.new")
+    public void listen(String myMessages) {
+        logger.info("Received: " + myMessages);
+
+    }
 
 }
