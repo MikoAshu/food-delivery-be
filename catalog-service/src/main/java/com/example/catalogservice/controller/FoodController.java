@@ -3,7 +3,6 @@ package com.example.catalogservice.controller;
 import com.example.catalogservice.domain.Food;
 import com.example.catalogservice.domain.Restaurant;
 import com.example.catalogservice.dto.FoodDto;
-import com.example.catalogservice.intergation.KaffkaFoodSender;
 import com.example.catalogservice.service.FoodService;
 import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,17 +29,17 @@ public class FoodController {
     @Autowired
     private KafkaTemplate<Object, Object> kafkaTemplate;
 
+
     @GetMapping("/getfoods")
     public ResponseEntity<List<FoodDto>> getfoods(){
         List<FoodDto> foodsdtos= foodService.getFoods();
-        if (foodsdtos==null){
+        if (foodsdtos == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
         Date date = new Date();
         Timestamp timestamp2 = new Timestamp(date.getTime());
         this.kafkaTemplate.send("events.new", "List of Foods Accessed  "+foodsdtos.toString()+"Accessed at"+timestamp2);
-
         return new ResponseEntity<>(foodsdtos, HttpStatus.OK);
     }
 
