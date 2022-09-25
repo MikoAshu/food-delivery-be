@@ -1,13 +1,13 @@
-package com.example.catalogservice;
+// package com.example.catalogservice;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+// import org.junit.jupiter.api.Test;
+// import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class CatalogServiceApplicationTests {
+// @SpringBootTest
+// class CatalogServiceApplicationTests {
 
-    @Test
-    void contextLoads() {
-    }
+//     @Test
+//     void contextLoads() {
+//     }
 
-}
+// }

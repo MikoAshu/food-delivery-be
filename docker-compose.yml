@@ -7,36 +7,21 @@ services:
     volumes:
       - ./api-gateway/conf/nginx.conf:/etc/nginx/nginx.conf
   user-service:
-    image: fd-user-service
+    image: user-service
     ports:
-      - "8081:8080"
-    environment:
-      - SPRING_PROFILES_ACTIVE=prod
-      - SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/food_delivery
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=123456
-      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.jdbc.Driver
-      - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.MySQL5InnoDBDialect
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=create
-      - SPRING_JPA_SHOW_SQL=true
-      - SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL=true
-      - SPRING_JPA_PROPERTIES_HIBERNATE_NAMING_STRATEGY=org.hibernate.cfg.ImprovedNamingStrategy
-      - SPRING_JPA_PROPERTIES_HIBERNATE_USE_SQL_COMMENTS=true
-      - SPRING_JPA_PROPERTIES_HIBERNATE_ID_NEW_GENERATOR_MAPPINGS=false
-      - SPRING_JPA_PROPERTIES_HIBERNATE_GENERATE_STATISTICS=true 
-      - SPRING_MVC_PATHMATCH_STRATEGY=ant_path_matcher
-  # order-service:
-  #   image: fd-order-service
-  #   ports:
-  #     - "8082:8080"
-  # cart-service:
-  #   image: fd-cart-service
-  #   ports:
-  #     - "8083:8080"
-  # catalog-service:
-  #   image: fd-catalog-service
-  #   ports:
-  #     - "8084:8080"
+      - "8080:9090"
+  order-service:
+    image: order-service
+    ports:
+      - "8081:9090"
+  cart-service:
+    image: cart-service
+    ports:
+      - "8082:9090"
+  catalog-service:
+    image: catalog-service
+    ports:
+      - "8083:9090"
   zookeeper:
     image: 'bitnami/zookeeper:latest'
     ports:

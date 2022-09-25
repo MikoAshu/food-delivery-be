@@ -10,7 +10,7 @@ RUN mvn package
 
 FROM openjdk
 
-EXPOSE 8080
+EXPOSE 9090
 
 CMD java -jar /data/user-service-0.0.1.jar
 
