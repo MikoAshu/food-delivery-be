@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="4636ba9a-b82b-4897-97a7-4a40272c32d7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/CatalogServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/CatalogServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/controller/FoodController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/controller/FoodController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/catalogservice/intergation/KaffkaFoodSender.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,6 +128,7 @@
       <workItem from="1664051079255" duration="4394000" />
       <workItem from="1664067183317" duration="680000" />
       <workItem from="1664068804897" duration="3922000" />
+      <workItem from="1664127835252" duration="7933000" />
     </task>
     <servers />
   </component>
@@ -164,16 +168,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/example/catalogservice/security/JwtTokenFilter.java</url>
           <line>35</line>
           <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/catalogservice/intergation/KaffkaFoodSender.java</url>
-          <line>69</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/catalogservice/intergation/KaffkaFoodSender.java</url>
-          <line>71</line>
-          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
