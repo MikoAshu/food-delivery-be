@@ -1,0 +1,57 @@
+version: '3'
+services:
+  web:
+    image: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./api-gateway/conf/nginx.conf:/etc/nginx/nginx.conf
+  user-service:
+    image: fd-user-service
+    ports:
+      - "8081:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/food_delivery
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=123456
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.jdbc.Driver
+      - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.MySQL5InnoDBDialect
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create
+      - SPRING_JPA_SHOW_SQL=true
+      - SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL=true
+      - SPRING_JPA_PROPERTIES_HIBERNATE_NAMING_STRATEGY=org.hibernate.cfg.ImprovedNamingStrategy
+      - SPRING_JPA_PROPERTIES_HIBERNATE_USE_SQL_COMMENTS=true
+      - SPRING_JPA_PROPERTIES_HIBERNATE_ID_NEW_GENERATOR_MAPPINGS=false
+      - SPRING_JPA_PROPERTIES_HIBERNATE_GENERATE_STATISTICS=true 
+      - SPRING_MVC_PATHMATCH_STRATEGY=ant_path_matcher
+  # order-service:
+  #   image: fd-order-service
+  #   ports:
+  #     - "8082:8080"
+  # cart-service:
+  #   image: fd-cart-service
+  #   ports:
+  #     - "8083:8080"
+  # catalog-service:
+  #   image: fd-catalog-service
+  #   ports:
+  #     - "8084:8080"
+  zookeeper:
+    image: 'bitnami/zookeeper:latest'
+    ports:
+      - '2181:2181'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+  kafka:
+    image: 'bitnami/kafka:latest'
+    ports:
+      - '9092:9092'
+    environment:
+      - KAFKA_BROKER_ID=1
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://127.0.0.1:9092
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    depends_on:
+      - zookeeper
