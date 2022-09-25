@@ -29,7 +29,13 @@ services:
     ports:
       - "8083:9090"
     extra_hosts:
-      - "host.docker.internal:host-gateway"     
+      - "host.docker.internal:host-gateway"   
+  log-service:
+    image: log-service
+    ports:
+      - "8084:9090"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"             
   zookeeper:
     image: 'bitnami/zookeeper:latest'
     ports:
