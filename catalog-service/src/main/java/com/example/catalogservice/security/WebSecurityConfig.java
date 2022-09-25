@@ -1,4 +1,4 @@
-package miu.edu.cs544.userservice.security;
+package com.example.catalogservice.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -28,37 +28,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-    http.authorizeRequests()//
-        .antMatchers("/users/signin").permitAll()
-        .antMatchers("/users/signup").permitAll()
-        .antMatchers("/test").permitAll()
-        .anyRequest().authenticated();
 
-    http.exceptionHandling().accessDeniedPage("/login");
-
-    http.apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
+//    http.apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
 
   }
-
-  @Override
-  public void configure(WebSecurity web) throws Exception {
-    web.ignoring().antMatchers("/v2/api-docs")//
-        .antMatchers("/swagger-resources/**")//
-        .antMatchers("/swagger-ui.html")//
-        .antMatchers("/configuration/**")//
-        .antMatchers("/webjars/**")//
-        .antMatchers("/public");
-  }
-
-  @Bean
-  public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder(12);
-  }
-
-  @Override
-  @Bean
-  public AuthenticationManager authenticationManagerBean() throws Exception {
-    return super.authenticationManagerBean();
-  }
-
 }
