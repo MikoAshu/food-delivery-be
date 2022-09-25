@@ -10,10 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController("/resturant")
 public class ResturantController {
-
     @Autowired
     RestaurantService restaurantService;
-
     @PostMapping("/addRestruant")
     public ResponseEntity<Restaurant> addRestruant(@RequestBody Restaurant restaurant){
          restaurantService.addRestaurant(restaurant);

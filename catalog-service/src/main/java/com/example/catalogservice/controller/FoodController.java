@@ -18,6 +18,9 @@ public class FoodController {
     @Autowired
     FoodService foodService;
 
+//    @Autowired
+//    KaffkaFoodSender kaffkaSender;
+
     @GetMapping("/getfoods")
     public ResponseEntity<List<FoodDto>> getfoods(){
         List<FoodDto> foodsdtos= foodService.getFoods();
