@@ -7,46 +7,57 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
+
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/cart")
 public class CartItemController {
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private KafkaTemplate<Object, Object> kafkaTemplate;
+
     @Autowired
     private CartItemService cartItemService;
 
-    @GetMapping("/cart/")
-    public List<CartItemDTO> getAllCartItems() {
-        return cartItemService.getAllCartItems().stream().map(item -> modelMapper.map(item, CartItemDTO.class))
-                .collect(Collectors.toList());
+    @GetMapping("/cart")
+    public ResponseEntity<List<CartItemDTO>> getAllCartItems() {
+        List<CartItemDTO> itemDTOS= cartItemService.getAllCartItems();
+        if (itemDTOS==null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        Date date = new Date();
+        Timestamp timestamp2 = new Timestamp(date.getTime());
+        this.kafkaTemplate.send("events.new", "List of Cart items  "+itemDTOS.toString()+"Accessed at"+timestamp2);
+
+        return new ResponseEntity<>(itemDTOS, HttpStatus.OK);
+
     }
 
-    @PostMapping("/cart/")
-    public ResponseEntity<CartItemDTO> addCartItem(@RequestBody CartItemDTO cartItemDTO) {
-        //convert DTO to entity
-        CartItem cartItemRequest = modelMapper.map(cartItemDTO, CartItem.class);
-        CartItem item = cartItemService.addCartItem(cartItemRequest);
-
-        //convert entity to DTO
-        CartItemDTO cartItemResponse = modelMapper.map(item, CartItemDTO.class);
-        return new ResponseEntity<CartItemDTO>(cartItemResponse, HttpStatus.CREATED);
+    @PostMapping("/cart")
+    public ResponseEntity<?> addCartItem(@RequestBody CartItem cartItem) {
+        cartItemService.addCartItem(cartItem);
+        Date date = new Date();
+        Timestamp timestamp2 = new Timestamp(date.getTime());
+        this.kafkaTemplate.send("events.new", "Cart Item Added "+cartItem.toString()+" Added at "+timestamp2);
+        return new ResponseEntity<>("Cart item added successfully", HttpStatus.OK);
     }
 
     @PutMapping("/cart/{id}")
-    public ResponseEntity<CartItemDTO> updateCartItem(@PathVariable Long id, @RequestBody CartItemDTO cartItemDTO) {
-        CartItem cartItemRequest = modelMapper.map(cartItemDTO, CartItem.class);
-        CartItem item = cartItemService.updateCartItem(id, cartItemRequest);
-
-        CartItemDTO cartItemResponse = modelMapper.map(item, CartItemDTO.class);
-        return ResponseEntity.ok().body(cartItemResponse);
+    public ResponseEntity<?> updateCartItem(@PathVariable Integer id, @RequestBody CartItem cartItem) {
+        cartItemService.updateCartItem(id,cartItem);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
     @DeleteMapping("/cart/{id}")
-    public ResponseEntity<CartItemDTO> deleteCartItem(@PathVariable Long id) {
+    public ResponseEntity<CartItemDTO> deleteCartItem(@PathVariable Integer id) {
         cartItemService.deleteCartItem(id);
         CartItemDTO cartItemResponse = modelMapper.map(null, CartItemDTO.class);
         return ResponseEntity.ok().body(cartItemResponse);

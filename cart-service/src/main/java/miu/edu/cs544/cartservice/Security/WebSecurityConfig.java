@@ -28,6 +28,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-    http.apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
+   // http.apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
   }
 }

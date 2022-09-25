@@ -8,7 +8,7 @@ import java.util.List;
 @Entity
 public class Cart {
     @Id
-    private Long userId;
+    private Integer userId;
     @OneToMany
     List<CartItem> cartItems;
 
@@ -23,14 +23,14 @@ public class Cart {
     public Cart() {
     }
 
-    public Cart(Long userId) {
+    public Cart(Integer userId) {
         this.userId = userId;
     }
-    public Long getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
