@@ -1,14 +1,13 @@
 package com.example.catalogservice.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
+
 public class FoodRestaurantDto {
     private Long id;
     private FoodDto food;

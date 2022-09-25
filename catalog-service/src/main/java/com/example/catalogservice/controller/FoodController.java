@@ -36,11 +36,11 @@ public class FoodController {
         if (foodsdtos==null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        Date date = new Date();
 
+        Date date = new Date();
         Timestamp timestamp2 = new Timestamp(date.getTime());
-        this.kafkaTemplate.send("events.new", "DataAcessed"+foodsdtos.toString()+"Accessed at"+timestamp2);
-       
+        this.kafkaTemplate.send("events.new", "List of Foods Accessed  "+foodsdtos.toString()+"Accessed at"+timestamp2);
+
         return new ResponseEntity<>(foodsdtos, HttpStatus.OK);
     }
 
@@ -50,12 +50,17 @@ public class FoodController {
         if (food==null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        Date date = new Date();
+        Timestamp timestamp2 = new Timestamp(date.getTime());
+        this.kafkaTemplate.send("events.new", " Food Accessed "+food.toString()+" Accessed at "+timestamp2);
         return new ResponseEntity<>(food, HttpStatus.OK);
     }
     @PostMapping("/addfood")
     public ResponseEntity<?> addFood(@RequestBody Food food){
         foodService.addfood(food);
+        Date date = new Date();
+        Timestamp timestamp2 = new Timestamp(date.getTime());
+        this.kafkaTemplate.send("events.new", "Food Added "+food.toString()+" Added at "+timestamp2);
         return new ResponseEntity<>("Food created successfully", HttpStatus.OK);
     }
-
 }
