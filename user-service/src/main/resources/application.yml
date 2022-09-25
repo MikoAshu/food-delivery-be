@@ -26,7 +26,7 @@ server:
 security:
   jwt:
     token:
-      secret-key: secret-key
+      secret-key: food-delivery
       expire-length: 300000
 
 UserController:
