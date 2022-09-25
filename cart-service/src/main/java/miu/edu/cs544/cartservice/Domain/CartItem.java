@@ -9,8 +9,8 @@ public class CartItem {
     @Id
     @GeneratedValue
     private Long id;
-    private Long userId;
-    private Long foodId;
+    private Integer userId;
+    private Integer foodId;
     private Integer quantity;
 
     public CartItem() {
@@ -24,19 +24,19 @@ public class CartItem {
         this.id = id;
     }
 
-    public Long getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
-    public Long getFoodId() {
+    public Integer getFoodId() {
         return foodId;
     }
 
-    public void setFoodId(Long foodId) {
+    public void setFoodId(Integer foodId) {
         this.foodId = foodId;
     }
 
