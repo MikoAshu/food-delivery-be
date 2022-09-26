@@ -35,11 +35,10 @@ public class UserService {
   public String signin(String username, String password) {
     try {
       authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-      this.kafkaTemplate.send("events.new", " New user signin with Username - "+ username+" Accessed at "+ timestamp);
-      this.kafkaTemplate.send("user.service.newuser", "2");
+//      this.kafkaTemplate.send("events.new", " New user signin with Username "+ username+" Accessed at "+ timestamp);
       return jwtTokenProvider.createToken(username, userRepository.findByUsername(username));
     } catch (AuthenticationException e) {
-      this.kafkaTemplate.send("events.new", " Incorrect login attempt with Username - "+ username+" Accessed at "+ timestamp);
+//      this.kafkaTemplate.send("events.new", " Incorrect login attempt with Username - "+ username+" Accessed at "+ timestamp);
       throw new CustomException("Invalid username/password supplied", HttpStatus.UNPROCESSABLE_ENTITY);
     }
   }
@@ -48,8 +47,8 @@ public class UserService {
     if (!userRepository.existsByUsername(appUser.getUsername())) {
       appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
       userRepository.save(appUser);
-      this.kafkaTemplate.send("events.new", " New user signup in with Username - "+ appUser.getUsername()+" Accessed at "+ timestamp);
-//      this.kafkaTemplate.send("user.service.newuser", appUser.getId());
+//      this.kafkaTemplate.send("events.new", "New user signup in with Username - "+ appUser.getUsername()+" Accessed at "+ timestamp);
+      this.kafkaTemplate.send("user.service.newuser", appUser.getId().toString());
       return jwtTokenProvider.createToken(appUser.getUsername(), appUser);
     } else {
       throw new CustomException("Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
@@ -57,7 +56,7 @@ public class UserService {
   }
 
   public void delete(String username) {
-    this.kafkaTemplate.send("events.new", " User deleted with Username - "+ username+" Accessed at "+ timestamp);
+//    this.kafkaTemplate.send("events.new", "User deleted with Username - "+ username+" Accessed at "+ timestamp);
     userRepository.deleteByUsername(username);
   }
 

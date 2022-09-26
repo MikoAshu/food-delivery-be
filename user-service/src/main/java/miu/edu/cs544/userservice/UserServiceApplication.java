@@ -1,30 +1,27 @@
 package miu.edu.cs544.userservice;
 
-import lombok.RequiredArgsConstructor;
-import miu.edu.cs544.userservice.dao.AppUser;
-import miu.edu.cs544.userservice.dao.AppUserRole;
-import miu.edu.cs544.userservice.service.UserService;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.modelmapper.ModelMapper;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.annotation.EnableKafka;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import org.springframework.kafka.support.converter.JsonMessageConverter;
+import org.springframework.kafka.support.converter.RecordMessageConverter;
 
 @SpringBootApplication
-@RequiredArgsConstructor
 @EnableKafka
 public class UserServiceApplication {
-    final UserService userService;
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }
 
+
+//    @Bean
+//    public RecordMessageConverter converter() {
+//        return new JsonMessageConverter();
+//    }
     @Bean
     public NewTopic topic() {
         return new NewTopic("events.new", 10, (short) 1);
