@@ -10,7 +10,7 @@ To run the applciation, you need to have docker and docker-compose installed on 
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
 ```
-
+Create the database in mysql with the name fd_user, fd_order, fd_log, fd_cart, fd_catalog
 and run the following command:
 
 ```yml 

@@ -20,7 +20,6 @@ public class UserController {
 
   private final UserService userService;
   private final ModelMapper modelMapper;
-
   @PostMapping("/signin")
   @ApiOperation(value = "${UserController.signin}")
   @ApiResponses(value = {//
