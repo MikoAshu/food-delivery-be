@@ -39,6 +39,10 @@ public class CartServiceApplication {
         return new NewTopic("events.new", 10, (short) 1);
     }
 
+    @Bean
+    public NewTopic topicCart() {
+        return new NewTopic("user.service.newuser", 10, (short) 1);
+    }
     @KafkaListener(groupId = "gc", topics = "user.service.newuser")
     public void listen(String in) {
         logger.info("Received: " + in);

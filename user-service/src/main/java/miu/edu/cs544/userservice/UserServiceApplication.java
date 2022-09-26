@@ -17,7 +17,7 @@ import java.util.Arrays;
 
 @SpringBootApplication
 @RequiredArgsConstructor
-//@EnableKafka
+@EnableKafka
 public class UserServiceApplication {
     final UserService userService;
     @Bean
@@ -30,10 +30,10 @@ public class UserServiceApplication {
         return new NewTopic("events.new", 10, (short) 1);
     }
 
-//    @Bean
-//    public NewTopic topicCart() {
-//        return new NewTopic("user.service.newuser", 10, (short) 1);
-//    }
+    @Bean
+    public NewTopic topicCart() {
+        return new NewTopic("user.service.newuser", 10, (short) 1);
+    }
     public static void main(String[] args) {
         SpringApplication.run(UserServiceApplication.class, args);
     }
