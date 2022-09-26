@@ -8,49 +8,110 @@ services:
       - ./api-gateway/conf/nginx.conf:/etc/nginx/nginx.conf
   user-service:
     image: user-service
+    build: ./user-service
     ports:
       - "8080:9090"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"        
+    restart: on-failure 
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/fd_user?useSSL=false
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=Mylovely
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - SPRING_KAFKA_CONSUMER_GROUP_ID=fd_user
+      - SPRING_SERVER_PORT=9090
+    depends_on:
+      kafka:
+        condition: service_healthy      
   order-service:
     image: order-service
+    build: ./order-service
     ports:
       - "8081:9090"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"       
+    restart: on-failure 
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/fd_order?useSSL=false
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=Mylovely
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - SPRING_KAFKA_CONSUMER_GROUP_ID=fd_order
+      - SPRING_SERVER_PORT=9090
+    depends_on:
+      kafka:
+        condition: service_healthy    
   cart-service:
     image: cart-service
+    build: ./cart-service
     ports:
       - "8082:9090"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"        
+    restart: on-failure 
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/fd_cart?useSSL=false
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=Mylovely
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - SPRING_KAFKA_CONSUMER_GROUP_ID=fd_cart
+      - SPRING_SERVER_PORT=9090
+    depends_on:
+      kafka:
+        condition: service_healthy       
   catalog-service:
     image: catalog-service
+    build: ./catalog-service
     ports:
       - "8083:9090"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"   
+    restart: on-failure 
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/fd_catalog?useSSL=false
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=Mylovely
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - SPRING_KAFKA_CONSUMER_GROUP_ID=fd_catalog
+      - SPRING_SERVER_PORT=9090
+    depends_on:
+      kafka:
+        condition: service_healthy    
   log-service:
     image: log-service
+    build: ./log-service
     ports:
       - "8084:9090"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"             
-  zookeeper:
-    image: 'bitnami/zookeeper:latest'
-    ports:
-      - '2181:2181'
+    restart: on-failure 
     environment:
-      - ALLOW_ANONYMOUS_LOGIN=yes
-  kafka:
-    image: 'bitnami/kafka:latest'
-    ports:
-      - '9092:9092'
-    environment:
-      - KAFKA_BROKER_ID=1
-      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092
-      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://127.0.0.1:9092
-      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
-      - ALLOW_PLAINTEXT_LISTENER=yes
+      - SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/fd_log?useSSL=false
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=Mylovely
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - SPRING_KAFKA_CONSUMER_GROUP_ID=fd_log
+      - SPRING_SERVER_PORT=9090
     depends_on:
-      - zookeeper
+      kafka:
+        condition: service_healthy  
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    ports:
+      - "2181:2181"
+    restart: always  
+    environment:
+      ZOOKEEPER_CLIENT_PORT: "2181"
+      ZOOKEEPER_TICK_TIME: "2000"
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      zookeeper:
+        condition: service_started
+    restart: always
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: "1"
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+      KAFKA_ADVERTISED_LISTENERS: "INTERNAL://kafka:9092,OUTSIDE://localhost:9094"
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "INTERNAL:PLAINTEXT,OUTSIDE:PLAINTEXT"
+      KAFKA_INTER_BROKER_LISTENER_NAME: "INTERNAL"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "1"
+    healthcheck:
+      test:
+        ["CMD", "kafka-topics", "--list", "--zookeeper", "zookeeper:2181"]
+      interval: 30s
+      timeout: 10s
+      retries: 4    
