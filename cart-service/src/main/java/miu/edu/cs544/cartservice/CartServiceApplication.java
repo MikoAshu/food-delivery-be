@@ -39,16 +39,10 @@ public class CartServiceApplication {
         return new NewTopic("events.new", 10, (short) 1);
     }
 
-    @KafkaListener(id = "topic", topics = "user.service.newuser")
+    @KafkaListener(groupId = "gc", topics = "user.service.newuser")
     public void listen(String in) {
         logger.info("Received: " + in);
         Integer id = Integer.parseInt(in);
         cartService.createCart(new Cart(id));
     }
-//    @KafkaListener( topics = "user.service.newuser")
-//    public void dltListen(String in) {
-//            System.out.println(in);
-//            Long id = Long.parseLong(in);
-//            cartService.createCart(new Cart(id));
-//    }
 }

@@ -33,7 +33,7 @@ public class CartController {
         }
         Date date = new Date();
         Timestamp timestamp2 = new Timestamp(date.getTime());
-//        this.kafkaTemplate.send("events.new", " Cart Accessed "+cart.toString()+" Accessed at "+timestamp2);
+        this.kafkaTemplate.send("events.new", " Cart Accessed "+cart.toString()+" Accessed at "+timestamp2);
         return new ResponseEntity<>(cart, HttpStatus.OK);
     }
 
