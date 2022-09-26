@@ -1,0 +1,18 @@
+# Food Delivery App
+Microservice based application for food delivery
+
+
+### Build
+To run the applciation, you need to have docker and docker-compose installed on your machine. Change the environment variables in the docker-compose.yml file for each of the services.
+
+```yml
+      - SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/fd_user?useSSL=false
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+```
+
+and run the following command:
+
+```yml 
+docker-compose up --build
+```
