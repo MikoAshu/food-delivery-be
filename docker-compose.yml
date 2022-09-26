@@ -19,9 +19,7 @@ services:
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
       - SPRING_KAFKA_CONSUMER_GROUP_ID=fd_user
       - SPRING_SERVER_PORT=9090
-    depends_on:
-      kafka:
-        condition: service_healthy      
+      - SERVER_PORT=9090
   order-service:
     image: order-service
     build: ./order-service
@@ -34,10 +32,7 @@ services:
       - SPRING_DATASOURCE_PASSWORD=Mylovely
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
       - SPRING_KAFKA_CONSUMER_GROUP_ID=fd_order
-      - SPRING_SERVER_PORT=9090
-    depends_on:
-      kafka:
-        condition: service_healthy    
+      - SPRING_SERVER_PORT=9090   
   cart-service:
     image: cart-service
     build: ./cart-service
@@ -50,10 +45,7 @@ services:
       - SPRING_DATASOURCE_PASSWORD=Mylovely
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
       - SPRING_KAFKA_CONSUMER_GROUP_ID=fd_cart
-      - SPRING_SERVER_PORT=9090
-    depends_on:
-      kafka:
-        condition: service_healthy       
+      - SPRING_SERVER_PORT=9090     
   catalog-service:
     image: catalog-service
     build: ./catalog-service
@@ -66,10 +58,7 @@ services:
       - SPRING_DATASOURCE_PASSWORD=Mylovely
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
       - SPRING_KAFKA_CONSUMER_GROUP_ID=fd_catalog
-      - SPRING_SERVER_PORT=9090
-    depends_on:
-      kafka:
-        condition: service_healthy    
+      - SPRING_SERVER_PORT=9090 
   log-service:
     image: log-service
     build: ./log-service
@@ -83,9 +72,6 @@ services:
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
       - SPRING_KAFKA_CONSUMER_GROUP_ID=fd_log
       - SPRING_SERVER_PORT=9090
-    depends_on:
-      kafka:
-        condition: service_healthy  
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     ports:
@@ -105,7 +91,7 @@ services:
     environment:
       KAFKA_BROKER_ID: "1"
       KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
-      KAFKA_ADVERTISED_LISTENERS: "INTERNAL://kafka:9092,OUTSIDE://127.0.0.1:9092"
+      KAFKA_ADVERTISED_LISTENERS: "INTERNAL://kafka:9092,OUTSIDE://127.0.0.1:9094"
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "INTERNAL:PLAINTEXT,OUTSIDE:PLAINTEXT"
       KAFKA_INTER_BROKER_LISTENER_NAME: "INTERNAL"
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "1"

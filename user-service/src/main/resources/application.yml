@@ -21,11 +21,11 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-  kafka:
-    producer:
-      bootstrap-servers: localhost:9092
+#  kafka:
+#    producer:
+#      bootstrap-servers: localhost:9092
 server:
-  port: 9091
+  port: 9090
 
 security:
   jwt:
