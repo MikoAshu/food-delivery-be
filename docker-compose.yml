@@ -15,7 +15,7 @@ services:
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/fd_user?useSSL=false
       - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=Mylovely
+      - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
       - SPRING_KAFKA_CONSUMER_GROUP_ID=fd_user
       - SPRING_SERVER_PORT=9090
@@ -29,7 +29,7 @@ services:
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/fd_order?useSSL=false
       - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=Mylovely
+      - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
       - SPRING_KAFKA_CONSUMER_GROUP_ID=fd_order
       - SPRING_SERVER_PORT=9090   
@@ -42,7 +42,7 @@ services:
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/fd_cart?useSSL=false
       - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=Mylovely
+      - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
       - SPRING_KAFKA_CONSUMER_GROUP_ID=fd_cart
       - SPRING_SERVER_PORT=9090     
@@ -55,7 +55,7 @@ services:
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/fd_catalog?useSSL=false
       - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=Mylovely
+      - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
       - SPRING_KAFKA_CONSUMER_GROUP_ID=fd_catalog
       - SPRING_SERVER_PORT=9090 
@@ -68,7 +68,7 @@ services:
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/fd_log?useSSL=false
       - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=Mylovely
+      - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
       - SPRING_KAFKA_CONSUMER_GROUP_ID=fd_log
       - SPRING_SERVER_PORT=9090
